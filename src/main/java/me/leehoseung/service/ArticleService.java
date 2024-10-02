@@ -1,0 +1,45 @@
+package me.leehoseung.service;
+
+import lombok.RequiredArgsConstructor;
+import me.leehoseung.domain.Article;
+import me.leehoseung.dto.AddArticleRequest;
+import me.leehoseung.dto.UpdateArticleRequest;
+import me.leehoseung.repository.ArticleRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class ArticleService {
+
+    private final ArticleRepository articleRepository;
+
+    public Article save(AddArticleRequest request) {
+        return articleRepository.save(request.toEntity());
+    }
+
+    public List<Article> findAll() {
+        return articleRepository.findAll();
+    }
+
+    public Article findById(long id) {
+        return articleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+    }
+
+    public void deleteById(long id) {
+        articleRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Article update(long id, UpdateArticleRequest request) {
+        Article article = articleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+
+        article.update(request.getTitle(), request.getContent());
+
+        return article;
+    }
+}

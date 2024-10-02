@@ -6,6 +6,8 @@ import me.leehoseung.dto.AddArticleRequest;
 import me.leehoseung.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
@@ -14,5 +16,9 @@ public class ArticleService {
 
     public Article save(AddArticleRequest request) {
         return articleRepository.save(request.toEntity());
+    }
+
+    public List<Article> findAll() {
+        return articleRepository.findAll();
     }
 }

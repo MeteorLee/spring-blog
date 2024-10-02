@@ -98,4 +98,29 @@ class ArticleControllerTest {
                 .andExpect(jsonPath("$[0].content").value(content));
 
     }
+
+    @DisplayName("findArticle: 블로그 글 조회에 성공한다.")
+    @Test
+    void findArticle() throws Exception {
+        // Given
+        final String url = "/api/articles/{id}";
+        final String title = "title";
+        final String content = "content";
+
+        Article savedArticle = articleRepository.save(Article.builder()
+                .title(title)
+                .content(content)
+                .build());
+        System.out.println(savedArticle.getId());
+
+        // When
+        ResultActions result = mockMvc.perform(get(url, savedArticle.getId()));
+
+        // Then
+        result
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value(title))
+                .andExpect(jsonPath("$.content").value(content));
+
+    }
 }

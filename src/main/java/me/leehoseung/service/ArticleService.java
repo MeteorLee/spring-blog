@@ -22,8 +22,12 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
-    public Article findById(Long id) {
+    public Article findById(long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+    }
+
+    public void deleteById(long id) {
+        articleRepository.deleteById(id);
     }
 }

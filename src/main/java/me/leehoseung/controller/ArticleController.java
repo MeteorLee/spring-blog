@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.leehoseung.domain.Article;
 import me.leehoseung.dto.AddArticleRequest;
 import me.leehoseung.dto.ArticleResponse;
+import me.leehoseung.dto.UpdateArticleRequest;
 import me.leehoseung.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +51,14 @@ public class ArticleController {
 
         return ResponseEntity.ok()
                 .build();
+    }
+
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<ArticleResponse> updateArticle(@PathVariable("id") long id,
+                                                         @RequestBody UpdateArticleRequest request) {
+        Article updatedArticle = articleService.update(id, request);
+
+        return ResponseEntity.ok()
+                .body(new ArticleResponse(updatedArticle));
     }
 }

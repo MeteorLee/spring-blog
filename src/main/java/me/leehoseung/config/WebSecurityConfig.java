@@ -40,9 +40,11 @@ public class WebSecurityConfig {
                             new AntPathRequestMatcher("/signup"),
                             new AntPathRequestMatcher("/user")
                     ).permitAll()
-                    .anyRequest().authenticated()).formLogin(formLogin -> formLogin
-                        .loginPage("login")
-                        .defaultSuccessUrl("/articles")).logout(logout -> logout
+                    .anyRequest().authenticated())
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/articles"))
+                .logout(logout -> logout
                                 .logoutSuccessUrl("/login")
                                 .invalidateHttpSession(true))
                 .csrf(AbstractHttpConfigurer::disable)

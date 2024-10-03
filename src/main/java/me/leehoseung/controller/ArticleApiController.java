@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class ArticleController {
+public class ArticleApiController {
 
     private final ArticleService articleService;
 

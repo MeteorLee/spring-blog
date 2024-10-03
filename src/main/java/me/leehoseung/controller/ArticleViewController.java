@@ -1,11 +1,14 @@
 package me.leehoseung.controller;
 
 import lombok.RequiredArgsConstructor;
+import me.leehoseung.domain.Article;
 import me.leehoseung.dto.ArticleListViewResponse;
+import me.leehoseung.dto.ArticleViewResponse;
 import me.leehoseung.service.ArticleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -25,5 +28,16 @@ public class ArticleViewController {
 
         return "articleList";
 
+    }
+
+    @GetMapping("/articles/{id}")
+    public String getArticle(@PathVariable("id") long id,
+                             Model model) {
+
+        Article article = articleService.findById(id);
+
+        model.addAttribute("article", new ArticleViewResponse(article));
+
+        return "article";
     }
 }

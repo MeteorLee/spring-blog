@@ -19,3 +19,7 @@ spring:
   h2:
     console:
       enabled: true
+
+jwt:
+  issuer: meteorproject529@gmail.com
+  secret_key: spring-blog

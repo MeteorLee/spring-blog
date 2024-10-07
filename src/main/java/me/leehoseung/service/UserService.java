@@ -21,4 +21,9 @@
                     .build()).getId();
         }
 
+        public User findById(long userId) {
+            return userRepository.findById(userId)
+                    .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+        }
+
     }

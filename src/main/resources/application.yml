@@ -12,6 +12,17 @@ spring:
 #    init:
 #      mode: never
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            클라이언트 아이디: 필요
+            클라이언트 비밀키: 필요
+            scope:
+              - email
+              - profile
+
   datasource:
     url: jdbc:h2:mem:testdb
     username: sa
@@ -19,3 +30,7 @@ spring:
   h2:
     console:
       enabled: true
+
+jwt:
+  issuer: meteorproject529@gmail.com
+  secret_key: spring-blog

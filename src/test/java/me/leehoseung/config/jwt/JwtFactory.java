@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.Map;
 
 @Getter
-class JwtFactory {
+public class JwtFactory {
     private String subject = "test@email.com";
     private Date issuedAt = new Date();
     private Date expiration = new Date(new Date().getTime() + Duration.ofDays(14).toMillis());
